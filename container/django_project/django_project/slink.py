@@ -64,7 +64,7 @@ class SLink:
         try:
             formatted_day = format_day[day]
         except:
-            print("Unknown day submitted to format_day: {}".format(day)")
+            print("Unknown day submitted to format_day: {}".format(day))
             print("Returning 'unk'")
             formatted_day = 'unk'
 
