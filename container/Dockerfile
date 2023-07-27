@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED=1
 RUN apt update && \
 	apt install -y python3 python3-pip
 
-RUN pip install django
+RUN pip install django pyyaml
 
 WORKDIR /opt
 COPY django_project/ /opt/django_project
