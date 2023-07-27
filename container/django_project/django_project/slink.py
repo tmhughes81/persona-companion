@@ -5,6 +5,7 @@ class SLink:
         self.details['name'] = 'None'
         
         self.details['school'] = False
+        self.details['night'] = False
 
         self.details['available_days'] = {
             'Monday': False,
@@ -117,4 +118,12 @@ class SLink:
     # Set school status
     def set_school(self, school:bool):
         self.details['school'] = school
+
+    # Get night status
+    def get_night(self):
+        return self.details['night']
+
+    # Set night details
+    def set_night(self, night:bool):
+        self.details['night'] = night
 
