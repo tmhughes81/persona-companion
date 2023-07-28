@@ -1,3 +1,5 @@
+import yaml
+
 class SLink:
     def __init__(self):
         self.details = {}
@@ -62,7 +64,7 @@ class SLink:
         }
 
         try:
-            formatted_day = format_day[day]
+            formatted_day = days[day]
         except:
             print("Unknown day submitted to format_day: {}".format(day))
             print("Returning 'unk'")
@@ -101,15 +103,15 @@ class SLink:
 
     # Set the best answers for a given rank of this link (e.g., a/1/a/2, a/a/a, etc)
     def set_ans_stage(self, rank:int, ans:str):
-        self.details['stages'][rank] = ans
+        self.details['stages'][rank] = str(ans)
 
     #get weekday availability
     def get_weekday_avail(self, day:str):
-        return self.details['availabile_days'][format_day(day)]
+        return self.details['availabile_days'][self.format_day(day)]
     
     # Set weekday availability
     def set_weekday_avail(self, day:str, avail:bool):
-        self.details['available_days'][format_day(day)] = avail
+        self.details['available_days'][self.format_day(day)] = avail
 
     # Get school status (e.g., is this link only available on school days)
     def get_school(self):
