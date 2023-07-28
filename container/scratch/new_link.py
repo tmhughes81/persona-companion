@@ -1,5 +1,13 @@
 from slink import SLink
 
+def valid_day(day:str):
+    days = set(["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"])
+
+    if day in days:
+        return True
+
+    return False
+
 if __name__ == "__main__":
     link = SLink()
     
@@ -34,7 +42,7 @@ if __name__ == "__main__":
         7: "P5R"
     }
 
-    link.set_game(game)
+    link.set_game(games[game])
 
     name = input("S. Link Name: ")
     if (name == ""):
@@ -45,9 +53,9 @@ if __name__ == "__main__":
 
     night = input("Is this a 'nighttime' link? [N]: ")
 
-    if (night == "" or lower(night) == "n"):
+    if (night == "" or night.lower() == "n"):
         night = False
-    elif (lower(night) == "y"):
+    elif (night.lower() == "y"):
         night = True
     else:
         print("Only valid options are 'Y' or 'N'.")
@@ -57,9 +65,9 @@ if __name__ == "__main__":
 
     school = input("Is this a 'school' link? [N]: ")
 
-    if (school == "" or lower(school) == "n"):
+    if (school == "" or school.lower() == "n"):
         school = False
-    elif (lower(school) == "y"):
+    elif (school.lower() == "y"):
         school = True
     else:
         print("Only valid options are 'Y' or 'N'.")
@@ -73,7 +81,17 @@ if __name__ == "__main__":
         print("At least one day must be set available!")
         exit(1)
 
-    i = 0
-    for i in range(i, len(avails)):
-        print(avails[i:i+2])
-        i += 2
+    for i in range(0, len(avails), 2):
+        day = avails[i:i+2]
+        if (not valid_day(day)):
+            print("String contains invalid day!")
+            exit(1)
+
+        link.set_weekday_avail(day, True)
+
+    for i in range(1,11):
+        link.set_ans_stage(i, input("Correct answers for stage {}: ".format(i)))
+    
+    with open("{}.yaml".format(link.get_name()), "w") as f:
+        f.write(link.export_yamls())
+
